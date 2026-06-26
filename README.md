@@ -27,7 +27,17 @@ rent-a-husband/
   .env.example
 ```
 
-The `app/` and `supabase/` trees are created by Claude Code in Phase 0 — see the build plan in the brief.
+## Backend foundation — already built
+
+The Supabase backend for Phases 0–1 is scaffolded in this repo, ready to apply:
+
+- `supabase/migrations/0001_init_schema.sql` — all core tables, enums, indexes, rating triggers (brief §5).
+- `supabase/migrations/0002_rls_policies.sql` — full Row-Level Security, privileged-column guard triggers, and private/public storage buckets (brief §9). SQL validated against the Postgres grammar; run `supabase db reset` to apply and verify end-to-end.
+- `supabase/seed.sql` — job categories + launch-zone row (brief §11).
+- `supabase/functions/wipay-create-payment` + `wipay-callback` — the WiPay payment flow, built to WiPay's real API (see `docs/wipay-notes.md`).
+- `docs/wipay-notes.md` — answers to the brief §13 open questions from WiPay's official docs.
+
+Claude Code still creates the `app/` (Expo) tree and wires the screens to this backend.
 
 ## Phased build plan
 
