@@ -1,0 +1,24 @@
+# Minimal Supabase local config. Claude Code should run `supabase init` to regenerate
+# the full file for the installed CLI version, then merge these intentful settings.
+project_id = "rent-a-husband"
+
+[db]
+major_version = 15
+
+[auth]
+# Email + phone auth (brief §3/§6). Configure providers in the Supabase dashboard for prod.
+enable_signup = true
+
+[auth.email]
+enable_signup = true
+enable_confirmations = false   # dev convenience; turn ON for production
+
+[storage]
+enabled = true
+
+# Edge Functions — secrets (WIPAY_*, SERVICE_ROLE) come from function env, never the bundle.
+[functions.wipay-create-payment]
+verify_jwt = true              # only signed-in users can start a payment
+
+[functions.wipay-callback]
+verify_jwt = false             # WiPay redirects the browser here with no JWT; we verify the MD5 hash instead
